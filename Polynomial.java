@@ -19,7 +19,7 @@ public class Polynomial {
 	public Polynomial(int[] coeffs) {
 		//TO DO
 		//System.out.println("look here------");
-		//Four loop to iterate through the array to find the highest index which should be the degree of the polynomial
+		//For loop to iterate through the array to find the highest index which should be the degree of the polynomial
 		for(int i =0; i < coeffs.length; i++) {
 			if(coeffs[i] != 0) {
 				degree = i;
@@ -99,12 +99,46 @@ public class Polynomial {
 	 * Does NOT change this polynomial */
 	public float atPoint(float arg) {
 		//TO DO
-		return 0; //STUB
+		float result = 0;
+				//for loop goes through all coefficients
+		for(int i = 0; i<= this.degree; i++) {
+			// calculate the value of the current term
+			float term = this.coefficients[i]*(float) Math.pow(arg, i);
+			result += term; //adds term to the result 
+		}
+		return result; //STUB
 	}
 	@Override
 	public String toString() {
 		//TO DO
-		return ""; //STUB
+		String result = "";
+		for(int i = this.degree; i>=0; i--) {
+			int coeff = this.coefficients[i];
+			
+			if(coeff == 0) continue;
+			
+			if(!result.isEmpty() && coeff >0) {
+				result += " + ";
+			}else if (coeff <0) {
+				result += " - ";
+				coeff = -coeff;
+			}
+			
+			if(i == 0) {
+				result += coeff;
+			
+			} else if (i==1) {
+				result += coeff + "x";
+			} else {
+				result += coeff + "x" + i;
+			}
+			
+		}
+		
+		if(result.isEmpty()) {
+			return "0";
+		}
+		return result; //STUB
 	}
 	
 	public int getDegree() {
